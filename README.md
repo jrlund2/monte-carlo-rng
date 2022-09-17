@@ -1,4 +1,3 @@
-﻿# monte-carlo-rng
 <!DOCTYPE html>
 <html>
   <head>
