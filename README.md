@@ -9,7 +9,9 @@
       You can execute any Python code. Just enter something in the box below and
       click the button.
     </p>
-    <input id="code" value="sum([1, 2, 3, 4, 5])" />
+    <input id="code" value="enter mean" />
+    <br />
+    <br />
     <button onclick="evaluatePython()">Run</button>
     <br />
     <br />
@@ -32,16 +34,21 @@
         return pyodide;
       }
       let pyodideReadyPromise = main();
-
+      
       async function evaluatePython() {
         let pyodide = await pyodideReadyPromise;
+        await pyodide.loadPackage("numpy");
         try {
-          let output = pyodide.runPython(code.value);
+          let output = pyodide.runPython(`
+          import numpy as np
+          np.random.normal(0.5,0.025,1)
+          `);
           addToOutput(output);
         } catch (err) {
           addToOutput(err);
         }
       }
+      main()
     </script>
   </body>
 </html>
